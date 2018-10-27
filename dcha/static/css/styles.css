@@ -1,0 +1,10 @@
+body{
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	background-color:#e9ebee;
+	color:#fff;
+}
+.btn{
+	color:#fff;
+	width: 260px;
+}

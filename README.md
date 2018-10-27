@@ -1,13 +1,18 @@
 # gists
 
-gists posts management
+Gists(posts) management
 
-How to use it:
+What it offers?
 
-1) Collect static files:
+1) Authenticate with GitHub account
+2) Create Gists(posts)
+3) Add comments to some Gists
 
-run: python3 webserver/manage.py collectstatic
+Disclaimer:
+  To save time and avoid additional setup for DB. The access token of a authenticated user will be passed to the client side directly. This is insecure.
+  Ideally on production, this access token should be saved in user db, e.g. Mongo, Mysql, etc.
 
-2) run webserver
-switch to webserver directory, then
-run: python3 manage.py runserver 0:8001
+
+How to use it?
+
+  run: startup.sh
