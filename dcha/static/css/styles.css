@@ -2,9 +2,80 @@ body{
 	font-family: system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	background-color:#e9ebee;
-	color:#fff;
+	padding-top: 40px;
 }
-.btn{
+.btn-github{
 	color:#fff;
 	width: 260px;
+}
+.middlelayer{
+	max-width:800px;
+	margin:auto auto;
+}
+#gist_desc, #gist_filename, #gist_content, .comment{
+	font-size:14px;
+	color:#999;
+	border:1px grey solid;
+	padding:4px;
+}
+#create_gists{
+	margin-top:32px;
+}
+.gist_row{
+	border: 1px solid #ccc;
+	border-radius:12px;
+	padding:12px;
+	margin-top:12px;
+}
+.comment_row{
+	padding-bottom:10px;
+}
+textarea{
+	height:200px;
+	max-width:790px;
+	width:100%;
+}
+.comment{
+	height:100px;
+	max-width:600px;
+	min-width:100%;
+	clear:both;
+}
+.form_row{
+	padding:4px;
+}
+.hidden{
+	display:none;
+}
+#gists_list img{
+	max-width:16px;
+}
+#gists_list .btn-danger{
+	font-size:12px;
+}
+.right{
+	float:right;
+}
+li{
+	list-style-type: none;
+}
+.indent{
+	padding-left:24px;
+}
+#loading_panel{
+	display:none;
+	width:100%;
+	height:100%;
+	left:0;
+	top:0;
+	position:fixed;
+	text-align:center;
+	background:linear-gradient(45deg, rgba(255,255,255,0) 48%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 52%),linear-gradient(-45deg, rgba(255,255,255,0) 48%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 52%);
+	background-size:1em 1em;
+	background-color:rgba(37, 50, 55, 0.9);
+}
+#loading_panel svg{
+	top:50% !important;
+	margin-top:-60px !important;
+	position:relative !important;
 }

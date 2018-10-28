@@ -3,6 +3,7 @@ from flask import jsonify
 from .endpoints.gists import gist_api
 from .endpoints.auth import auth_page
 from .endpoints.jsonconverter import JSONEncoderCustom
+from .nocache import nocache
 import logging.config
 import json
 
@@ -23,10 +24,12 @@ def render_static():
     return app.send_static_file('index.html')
 
 @app.route('/js/<path:path>')
+@nocache
 def send_js(path):
     return send_from_directory('static/js', path)
 
 @app.route('/css/<path:path>')
+@nocache
 def send_css(path):
     return send_from_directory('static/css', path)
 
