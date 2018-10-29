@@ -7,18 +7,25 @@ from .nocache import nocache
 import logging.config
 import json
 
+# configure logging settings
 with open('logging.json') as f:
     config_dict = json.load(f)
     logging.config.dictConfig(config_dict)
 
+# api version No.
 version = "v1.0"
 
 app = Flask(__name__, static_url_path='/static')
 
+# json serializer
 app.json_encoder = JSONEncoderCustom
+
+# define endpoints
 app.register_blueprint(gist_api, url_prefix=('/%s/gist' % version))
 app.register_blueprint(auth_page, url_prefix='/auth')
 
+
+# handling static pages & files
 @app.route('/')
 def render_static():
     return app.send_static_file('index.html')

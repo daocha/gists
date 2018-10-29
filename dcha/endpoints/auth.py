@@ -5,6 +5,7 @@ from flask import Flask, redirect, request, Blueprint, jsonify
 from dcha.security import aes
 import requests
 import json
+import logging
 
 client_id = "e506af0c5bf4efc48819"
 client_secret = "f4f275a6f94a2c67d52456d82d8371023bb6a7b9"
@@ -25,6 +26,7 @@ def auth_callback():
     """
         GitHub Authentication Callback
     """
+    logger = logging.getLogger(__name__)
     code = request.args.get('code')
 
     if code is None:
@@ -44,7 +46,7 @@ def auth_callback():
 
     for param in params:
         keyval = param.split("=")
-        print('%s=%s' % (keyval[0], keyval[1]))
+        logger.debug('%s=%s' % (keyval[0], keyval[1]))
         if keyval[0] == 'access_token':
             access_token = keyval[1]
 

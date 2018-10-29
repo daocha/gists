@@ -1,4 +1,5 @@
 let loggedIn = false;
+let apiVer = "v1.0";
 
 /** checking if access code is presented */
 function checkcode(){
@@ -24,9 +25,7 @@ function checkcode(){
       $("#login_panel").remove();
       loggedIn = true;
     }else{
-      $("#logout_panel").remove();
-      $("#gists_list_panel").remove();
-      $("#create_gists").remove();
+      $("#login_panel").siblings().remove();
     }
   }
 }
@@ -45,7 +44,7 @@ function create_gist(){
   // send request to create gist
   if(content.trim()){
     $.ajax({
-      url: "/v1.0/gist",
+      url: "/" + apiVer + "/gist",
       type: 'POST',
       dataType: 'json',
       data: JSON.stringify({
@@ -71,7 +70,7 @@ function delete_gist(gist_id){
 
   // send request to delete gist
   $.ajax({
-    url: "/v1.0/gist/"+gist_id,
+    url: "/" + apiVer + "/gist/"+gist_id,
     type: 'DELETE',
     dataType: 'json',
     headers: {
@@ -93,7 +92,7 @@ function list_gists(){
   let access_token = readAccessToken();
 
   $.ajax({
-    url: "/v1.0/gist",
+    url: "/" + apiVer + "/gist",
     type: 'GET',
     dataType: 'json',
     headers: {
@@ -175,7 +174,7 @@ function create_comment(gist_id){
   console.log("comment=" + comment);
   if(comment.trim()){
     $.ajax({
-      url: "/v1.0/gist/" + gist_id + "/comment",
+      url: "/" + apiVer + "/gist/" + gist_id + "/comments",
       type: 'POST',
       dataType: 'json',
       data: JSON.stringify({
@@ -199,7 +198,7 @@ function delete_comment(gist_id, comment_id){
 
   // send request to delete gist
   $.ajax({
-    url: "/v1.0/gist/"+gist_id+"/comment/"+comment_id,
+    url: "/" + apiVer + "/gist/"+gist_id+"/comments/"+comment_id,
     type: 'DELETE',
     dataType: 'json',
     headers: {
@@ -220,7 +219,7 @@ function list_comments(gist_id){
   console.log("Reading comments of " + gist_id + " from github");
   let access_token = readAccessToken();
   $.ajax({
-    url: "/v1.0/gist/"+gist_id+"/comments",
+    url: "/" + apiVer + "/gist/"+gist_id+"/comments",
     type: 'GET',
     dataType: 'json',
     headers: {

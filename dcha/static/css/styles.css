@@ -12,6 +12,14 @@ body{
 	max-width:800px;
 	margin:auto auto;
 }
+#login_panel{
+	position: fixed;
+	text-align:center;
+	width: 260px;
+	left:50%;
+	margin-left:-130px;
+	top:45%;
+}
 #gist_desc, #gist_filename, #gist_content, .comment{
 	font-size:14px;
 	color:#999;

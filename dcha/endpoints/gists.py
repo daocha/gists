@@ -7,6 +7,7 @@ from dcha.security import aes
 from urllib import parse
 import requests
 import json
+import logging
 
 gist_api = Blueprint('gist_api', __name__)
 
@@ -15,13 +16,14 @@ def deleteGist(gist_id):
     """
         Deleting one gist with id
     """
+    logger = logging.getLogger(__name__)
     gist_url = "https://api.github.com/gists/%s" % gist_id
     access_token = decryptAccessToken()
     params = {
         'access_token': access_token
     }
     res = requests.delete(gist_url, params=params)
-    print(res.text)
+    logger.debug(res.text)
     return jsonify(res.text)
 
 @gist_api.route("", methods=["GET"])
@@ -42,13 +44,14 @@ def createGist():
     """
         Post a new gist list
     """
+    logger = logging.getLogger(__name__)
     access_token = decryptAccessToken()
     create_gist_url = "https://api.github.com/gists"
     data = request.get_json(force=True)
     content = data.get('gist_content')
     description = data.get('gist_description')
     filename = data.get('gist_filename')
-    print('description: %s \nfilename: %s \ncontent: %s'
+    logger.debug('description: %s \nfilename: %s \ncontent: %s'
            % (description, filename, content))
     submit_content = {
       "description": description,
@@ -66,23 +69,24 @@ def createGist():
         'access_token': access_token
     }
     if content is not None:
-        print(json.dumps(submit_content))
+        logger.debug(json.dumps(submit_content))
         res = requests.post(create_gist_url, params=params,
                             data=json.dumps(submit_content),
                             headers=headers)
-        print(res)
+        logger.debug(res)
     return jsonify(success=True)
 
-@gist_api.route("/<gist_id>/comment", methods=["POST"])
+@gist_api.route("/<gist_id>/comments", methods=["POST"])
 def createComment(gist_id):
     """
         Post a new comment to a gist
     """
+    logger = logging.getLogger(__name__)
     access_token = decryptAccessToken()
     create_comment_url = "https://api.github.com/gists/%s/comments" % gist_id
     data = request.get_json(force=True)
     comment = data.get('gist_comment')
-    print('comment: %s' % comment)
+    logger.debug('comment: %s' % comment)
     submit_comment = {
       "body": comment
     }
@@ -93,11 +97,11 @@ def createComment(gist_id):
         'access_token': access_token
     }
     if comment is not None:
-        print(json.dumps(submit_comment))
+        logger.debug(json.dumps(submit_comment))
         res = requests.post(create_comment_url, params=params,
                             data=json.dumps(submit_comment),
                             headers=headers)
-        print(res)
+        logger.debug(res)
     return jsonify(success=True)
 
 @gist_api.route("/<gist_id>/comments", methods=["GET"])
@@ -113,27 +117,29 @@ def getCommentsList(gist_id):
     res = requests.get(comment_list_url, params=params)
     return jsonify(res.text)
 
-@gist_api.route("/<gist_id>/comment/<comment_id>", methods=["DELETE"])
+@gist_api.route("/<gist_id>/comments/<comment_id>", methods=["DELETE"])
 def deleteComment(gist_id, comment_id):
     """
         Deleting one gist with id
     """
+    logger = logging.getLogger(__name__)
     comment_url = "https://api.github.com/gists/%s/comments/%s" % (gist_id, comment_id)
     access_token = decryptAccessToken()
     params = {
         'access_token': access_token
     }
     res = requests.delete(comment_url, params=params)
-    print(res.text)
+    logger.debug(res.text)
     return jsonify(res.text)
 
 def decryptAccessToken():
     """
         read access-token from header and decrypt it
     """
+    logger = logging.getLogger(__name__)
     cipher_access_token = request.headers.get('access-token')
     decoded_access_token = parse.unquote(cipher_access_token).replace(' ','+')
-    print("cipher_access_token", cipher_access_token)
-    print("decoded_access_token", decoded_access_token)
+    logger.debug("cipher_access_token: %s" % cipher_access_token)
+    logger.debug("decoded_cipher_access_token: %s" % decoded_access_token)
     access_token = aes.decryptAES(decoded_access_token)
     return access_token
