@@ -8,9 +8,12 @@ import logging.config
 import json
 
 # configure logging settings
-with open('logging.json') as f:
-    config_dict = json.load(f)
-    logging.config.dictConfig(config_dict)
+try:
+    with open('logging.json') as f:
+        config_dict = json.load(f)
+        logging.config.dictConfig(config_dict)
+except Exception as e:
+    print(e)
 
 # api version No.
 version = "v1.0"

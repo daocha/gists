@@ -17,9 +17,11 @@ encoder = PKCS7Encoder()
 secret = "asdf;lkjqwert23423423vcdertgftg"
 salt = "dksflesfsdfsfwe8923"
 
+
 def encryptAsStr(plaintext, key, iv):
     ciphertext = encrypt(plaintext, key, iv)
     return b64encode(ciphertext).decode("utf-8")
+
 
 def encrypt(plaintext, key, iv):
     if isinstance(key, str):
@@ -48,8 +50,10 @@ def encrypt(plaintext, key, iv):
     pad_text = encoder.encode(plaintext)
     return aes.encrypt(pad_text)
 
+
 def decryptAsStr(ciphertext, key, iv):
     return decrypt(b64decode(ciphertext), key, iv).decode("utf-8")
+
 
 def decrypt(ciphertext, key, iv):
     if isinstance(key, str):
@@ -78,6 +82,7 @@ def decrypt(ciphertext, key, iv):
     pad_text = aes.decrypt(ciphertext)
     return encoder.decode(pad_text)
 
+
 def encryptAES(plaintext):
     """
     Encryption with AES
@@ -85,6 +90,7 @@ def encryptAES(plaintext):
         plaintext: plaintext
     """
     return encryptAsStr(plaintext, secret, salt)
+
 
 def decryptAES(ciphertext):
     """

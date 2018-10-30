@@ -6,6 +6,7 @@ from Cryptodome.Cipher import AES
 import binascii
 from io import StringIO
 
+
 class PKCS7Encoder(object):
     '''
     RFC 2315: PKCS#7 page 21
@@ -31,10 +32,11 @@ class PKCS7Encoder(object):
     padding method is well-defined if and only if k < 256;
     methods for larger k are an open issue for further study.
     '''
+
     def __init__(self, k=16):
         self.k = k
 
-    ## @param text The padded text for which the padding is to be removed.
+    # @param text The padded text for which the padding is to be removed.
     # @exception ValueError Raised when the input padding is missing or corrupt.
     def decode(self, text):
         '''
@@ -49,7 +51,7 @@ class PKCS7Encoder(object):
 
         return text[:l]
 
-    ## @param text The text to encode.
+    # @param text The text to encode.
     def encode(self, text):
         '''
         Pad an input string according to PKCS#7

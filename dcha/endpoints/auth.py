@@ -1,25 +1,30 @@
 # Date: 27 Oct 2018
 # Author: Ray LI
 """ GitHub authentication """
+
 from flask import Flask, redirect, request, Blueprint, jsonify
 from dcha.security import aes
 import requests
 import json
 import logging
 
+# github app client_id & client_secret
 client_id = "e506af0c5bf4efc48819"
 client_secret = "f4f275a6f94a2c67d52456d82d8371023bb6a7b9"
 
 auth_page = Blueprint('auth_page', __name__)
+
 
 @auth_page.route("/", methods=["GET"])
 def auth():
     """
         Authenticate in GitHub
     """
+    # redirect to Github authentication page
     auth_url = "https://github.com/login/oauth/authorize?client_id=" + client_id \
-                + "&scope=user:email%20gist"
+        + "&scope=user:email%20gist"
     return redirect(auth_url)
+
 
 @auth_page.route("/callback", methods=["GET"])
 def auth_callback():
@@ -34,6 +39,7 @@ def auth_callback():
 
     access_token_url = "https://github.com/login/oauth/access_token"
 
+    # use code to retrieve access token
     res = requests.post(access_token_url, params={
         'client_id': client_id,
         'client_secret': client_secret,
@@ -42,11 +48,13 @@ def auth_callback():
 
     result = res.content.decode("utf-8")
 
+    # split the return parameters
     params = result.split("&")
 
     for param in params:
         keyval = param.split("=")
         logger.debug('%s=%s' % (keyval[0], keyval[1]))
+        # find access token
         if keyval[0] == 'access_token':
             access_token = keyval[1]
 

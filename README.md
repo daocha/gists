@@ -16,3 +16,8 @@ Disclaimer:
 How to use it?
 
   run: startup.sh
+
+
+Run Unit Test?
+
+  run: test.sh
