@@ -2,7 +2,7 @@
 # Author: Ray LI
 """ Test case for AES encryption """
 
-from dcha.flask import app, version
+from dcha.main import app, version
 from unittest import mock, TestCase
 from flask import Response
 
