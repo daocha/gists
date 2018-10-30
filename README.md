@@ -21,3 +21,7 @@ How to use it?
 Run Unit Test?
 
   run: test.sh
+
+Build docker image
+
+  run: docker-build.sh
