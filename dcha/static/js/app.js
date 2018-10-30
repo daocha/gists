@@ -64,6 +64,7 @@ function create_gist() {
             }
         });
     } else {
+        error("Please fill in the form.");
         console.log("Content is empty.");
     }
 }
