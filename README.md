@@ -9,19 +9,19 @@ What it offers?
   3) Add comments to some Gists
 
 Disclaimer:
-  To save time and avoid additional setup for DB. The access token of a authenticated user will be encrypted and passed to the client side directly.
+  To save time and avoid additional setup for DB. The access token of an authenticated user will be encrypted and passed to the client side directly.
   Ideally on production, this access token should be saved in user db, e.g. Mongo, Mysql, etc.
 
 
-How to use it?
+<b>How to use it?</b>
 
   run: startup.sh
 
 
-Run Unit Test?
+<b>Run Unit Test?</b>
 
   run: test.sh
 
-Build docker image
+<b>Build docker image</b>
 
   run: docker-build.sh
